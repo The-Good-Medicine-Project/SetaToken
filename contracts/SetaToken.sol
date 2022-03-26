@@ -40,12 +40,17 @@ contract SetasToken {
         router = IUniswapV2Router02(0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3);//router address for pair creation
         pancakePairAddress = IPancakeFactory(router.factory()).createPair(address(this), router.WETH());
 
-        uint _firstPresaleTokens =  1500000;//15%
-        uint _secondPresaleTokens = 1500000;//15%
-        uint _teamVestingTokens =   1500000;//15%
-        uint _marketingTokens =     1500000;//15%
+        uint _firstPresaleTokens =  1500000;//15% of total tokens will go to this private investor sale of tokens with the remainder being burnt.
+        uint _secondPresaleTokens = 1500000;//15% of total tokens will go to this second presale of tokens with the remainder being burnt.
+        uint _teamVestingTokens =   1500000;//15% of total tokens will be locked to the team vesting @ 10% 30 Days  full unlock after 300 days
+        uint _marketingTokens =     1500000;//15% of total tokens will go towards marketing and publicity
         uint _contractTokens = totalSupply - (_teamVestingTokens + _marketingTokens + _firstPresaleTokens + _secondPresaleTokens);
-        //40% left to contract
+        
+        //of 100% Token Balance 30% is sold or burned during two private sales events and 40% is allocated to liquidity/uniswap leaving only 
+        //15% locked in vesting at 10% every 30 days 
+        //15% to the Marketing and Dev wallet for the advancement of the project
+        
+       
         balanceOf[firstPresaleContract] = _firstPresaleTokens;
         balanceOf[secondPresaleContract] = _secondPresaleTokens;
         balanceOf[teamVestingContract] = _teamVestingTokens;
